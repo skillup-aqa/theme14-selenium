@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'jacoco'
 }
 
 group 'org.example'
@@ -11,23 +10,15 @@ repositories {
 }
 
 dependencies {
-    testImplementation 'org.testng:testng:7.10.2'
+    implementation 'org.testng:testng:7.10.2'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.21.0'
 }
 
 test {
+    systemProperties = System.properties
+
     useTestNG() {
         useDefaultListeners = true
         suites 'src/test/resources/testng.xml'
-    }
-
-    finalizedBy jacocoTestReport // report is always generated after tests run
-}
-
-jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-    reports {
-        xml.enabled true
-        csv.enabled true
-        html.enabled true
     }
 }
