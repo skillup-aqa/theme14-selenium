@@ -19,15 +19,4 @@ test {
         useDefaultListeners = true
         suites 'src/test/resources/testng.xml'
     }
-
-    finalizedBy jacocoTestReport // report is always generated after tests run
-}
-
-jacocoTestReport {
-    dependsOn test // tests are required to run before generating the report
-    reports {
-        xml.enabled true
-        csv.enabled true
-        html.enabled true
-    }
 }
