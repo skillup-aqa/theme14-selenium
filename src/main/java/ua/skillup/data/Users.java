@@ -1,7 +1,7 @@
 package ua.skillup.data;
 
 public enum Users {
-    STANDARD_USER("standard_user", "secret_sauce"),
+    STANDARD_USER("standard_user", "secret_sauce");
     // TODO: placeholder for others
 
     private final String username;
