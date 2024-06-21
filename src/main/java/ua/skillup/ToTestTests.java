@@ -13,13 +13,13 @@ public class ToTestTests {
 
         inventoryPage.open();
         inventoryPage.printElementNames();
-        inventoryPage.sortList("Name (Z to A)");
+        inventoryPage.sortList(inventoryPage.sortListValue[1]);
         System.out.println("----------------");
         inventoryPage.printElementNames();
-        inventoryPage.sortList("Price (low to high)");
+        inventoryPage.sortList(inventoryPage.sortListValue[2]);
         System.out.println("----------------");
         inventoryPage.printElementNames();
-        inventoryPage.sortList("Price (high to low)");
+        inventoryPage.sortList(inventoryPage.sortListValue[3]);
         System.out.println("----------------");
         inventoryPage.printElementNames();
 

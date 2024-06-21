@@ -3,32 +3,44 @@ package ua.skillup;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import static org.testng.Assert.assertTrue;
 
 
 public class SauceLabInventoryTest {
     WebDriver driver;
     InventoryPage inventoryPage;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
         driver = new ChromeDriver();
         inventoryPage = new InventoryPage(driver);
-    }
-
-    @Test
-    public void open() {
         inventoryPage.open();
     }
 
     @Test
-    public void printElementNames(){
-        inventoryPage.printElementNames();
+    public void onInventoryPage() {
+        assertTrue(inventoryPage.isOnInventoryPage());
     }
 
-    @AfterMethod
+    @DataProvider//(parallel = true)
+    public Object[] filters() {
+        return new Object[]{
+                inventoryPage.sortListValue[0],
+                inventoryPage.sortListValue[1],
+                inventoryPage.sortListValue[2],
+                inventoryPage.sortListValue[3]
+        };
+    }
+
+    @Test(dataProvider = "filters")
+    public void testFilters(String filters) {
+        inventoryPage.sortList(filters);
+        assertTrue(inventoryPage.isSorted(filters));
+    }
+
+    @AfterClass
     public void tearDown() {
         driver.quit();
     }
