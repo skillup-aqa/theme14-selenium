@@ -40,6 +40,8 @@ public class SauceLabInventoryTest {
         assertTrue(inventoryPage.isSorted(filters));
     }
 
+
+
     @AfterClass
     public void tearDown() {
         driver.quit();

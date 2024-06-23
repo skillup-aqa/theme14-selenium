@@ -22,9 +22,5 @@ public class ToTestTests {
         inventoryPage.sortList(inventoryPage.sortListValue[3]);
         System.out.println("----------------");
         inventoryPage.printElementNames();
-
-
-
-
     }
 }

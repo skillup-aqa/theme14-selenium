@@ -108,7 +108,4 @@ public class InventoryPage {
             throw new IllegalArgumentException("Unsupported filter: " + filter);
         }
     }
-
-
-
 }
