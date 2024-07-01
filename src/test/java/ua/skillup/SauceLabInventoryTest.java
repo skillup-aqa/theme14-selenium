@@ -37,6 +37,8 @@ public class SauceLabInventoryTest {
     @Test(dataProvider = "filters")
     public void testFilters(String filters) {
         inventoryPage.sortList(filters);
+        inventoryPage.printElementNames();
+        System.out.println("----------------");
         assertTrue(inventoryPage.isSorted(filters));
     }
 
@@ -44,4 +46,5 @@ public class SauceLabInventoryTest {
     public void tearDown() {
         driver.quit();
     }
+
 }
