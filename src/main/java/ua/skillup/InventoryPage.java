@@ -14,7 +14,7 @@ public class InventoryPage {
     private final By SORT_LIST = By.xpath("//*[@data-test='product-sort-container']");
     private final By SHOPPING_CART = By.cssSelector("[data-test=\"inventory-item-price\"]");
 
-    public String[] sortListValue = {"Name (A to Z)", "Name (Z to A)", "Price (low to high)", "Price (high to low)"};
+    public final String[] sortListValue = {"Name (A to Z)", "Name (Z to A)", "Price (low to high)", "Price (high to low)"};
 
    // private List<WebElement> itemNames = ITEM_NAMES;
 
