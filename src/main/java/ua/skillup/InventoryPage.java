@@ -33,8 +33,8 @@ public class InventoryPage {
     }
 
     public boolean isOnInventoryPage() {
-        WebElement shoppingCart = driver.findElement(SHOPPING_CART);
-        return shoppingCart.isDisplayed();
+        List<WebElement> shoppingCart = driver.findElements(SHOPPING_CART);
+        return !shoppingCart.isEmpty();
     }
 
     public void printElementNames() {
