@@ -3,7 +3,10 @@ package ua.skillup;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
@@ -25,7 +28,7 @@ public class SauceLabInventoryTest {
     }
 
     @DataProvider//(parallel = true)
-    public Object[] filters() {
+    public Object[] filter() {
         return new Object[]{
                 inventoryPage.sortListValue[0],
                 inventoryPage.sortListValue[1],
@@ -34,12 +37,12 @@ public class SauceLabInventoryTest {
         };
     }
 
-    @Test(dataProvider = "filters")
-    public void testFilters(String filters) {
-        inventoryPage.sortList(filters);
+    @Test(dataProvider = "filter")
+    public void testFilters(String filter) {
+        inventoryPage.sortList(filter);
         inventoryPage.printElementNames();
         System.out.println("----------------");
-        assertTrue(inventoryPage.isSorted(filters));
+        assertTrue(inventoryPage.isSorted(filter));
     }
 
     @AfterClass
