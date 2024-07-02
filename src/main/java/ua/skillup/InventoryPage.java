@@ -6,7 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InventoryPage {
     private final By ITEM_NAMES = By.xpath("//*[@data-test='inventory-item-name']");
@@ -57,46 +59,40 @@ public class InventoryPage {
 
     private boolean isSortedByName(String filter) {
         List<WebElement> productNames = driver.findElements(ITEM_NAMES);
-        //List<WebElement> productNames = driver.findElements(By.cssSelector("div.inventory_item_name"));
+        List<String> names = productNames.stream()
+                .map(WebElement::getText)
+                .toList();
 
-        for (int i = 0; i < productNames.size() - 1; i++) {
-            String name1 = productNames.get(i).getText();
-            String name2 = productNames.get(i + 1).getText();
-            if (filter.contains("A to Z")) {
-                if (name1.compareTo(name2) > 0) {
-                    return false;
-                }
-            } else if (filter.contains("Z to A")) {
-                if (name1.compareTo(name2) < 0) {
-                    return false;
-                }
-            } else {
-                throw new IllegalArgumentException("Unsupported filter: " + filter);
-            }
+        List<String> sortedNames;
+        if (filter.contains("A to Z")) {
+            sortedNames = names.stream().sorted().collect(Collectors.toList());
+        } else if (filter.contains("Z to A")) {
+            sortedNames = names.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        } else {
+            throw new IllegalArgumentException("Unsupported filter: " + filter);
         }
-        return true;
+
+        return names.equals(sortedNames);
+
     }
+
 
     private boolean isSortedByPrice(String filter) {
         List<WebElement> productPrices = driver.findElements(PRICE_ITEMS);
-        //List<WebElement> productPrices = driver.findElements(By.cssSelector("div.inventory_item_price"));
+        List<Double> prices = productPrices.stream()
+                .map(element -> Double.parseDouble(element.getText().substring(1)))
+                .toList();
 
-        for (int i = 0; i < productPrices.size() - 1; i++) {
-            String price1 = productPrices.get(i).getText();
-            String price2 = productPrices.get(i + 1).getText();
-            if (filter.contains("low to high")) {
-                if (Double.parseDouble(price1.substring(1)) > Double.parseDouble(price2.substring(1))) {
-                    return false;
-                }
-            } else if (filter.contains("high to low")) {
-                if (Double.parseDouble(price1.substring(1)) < Double.parseDouble(price2.substring(1))) {
-                    return false;
-                }
-            } else {
-                throw new IllegalArgumentException("Unsupported filter: " + filter);
-            }
+        List<Double> sortedPrices;
+        if (filter.contains("low to high")) {
+            sortedPrices = prices.stream().sorted().collect(Collectors.toList());
+        } else if (filter.contains("high to low")) {
+            sortedPrices = prices.stream().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+        } else {
+            throw new IllegalArgumentException("Unsupported filter: " + filter);
         }
-        return true;
+
+        return prices.equals(sortedPrices);
     }
 
     public boolean isSorted(String filter) {
