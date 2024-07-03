@@ -39,18 +39,6 @@ public class InventoryPage {
         return !shoppingCart.isEmpty();
     }
 
-    public void printElementNames() {
-        List<WebElement> elements = driver.findElements(ITEM_NAMES);
-        List<WebElement> prices = driver.findElements(PRICE_ITEMS);
-
-
-        for (int i = 0; i < elements.size(); i++) {
-            String name = elements.get(i).getText();
-            String price = prices.get(i).getText().substring(1);
-            System.out.println(name + ": " + price);
-        }
-    }
-
     public void sortList (String string) {
         WebElement sortList = driver.findElement(SORT_LIST);
         Select select = new Select(sortList);

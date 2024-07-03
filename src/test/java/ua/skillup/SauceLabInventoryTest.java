@@ -35,8 +35,6 @@ public class SauceLabInventoryTest {
     @Test(dataProvider = "filter")
     public void testFilters(String filter) {
         inventoryPage.sortList(filter);
-        inventoryPage.printElementNames();
-        System.out.println("----------------");
         assertTrue(inventoryPage.isSorted(filter));
     }
 
