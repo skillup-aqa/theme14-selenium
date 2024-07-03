@@ -29,12 +29,7 @@ public class SauceLabInventoryTest {
 
     @DataProvider//(parallel = true)
     public Object[] filter() {
-        return new Object[]{
-                inventoryPage.sortListValue[0],
-                inventoryPage.sortListValue[1],
-                inventoryPage.sortListValue[2],
-                inventoryPage.sortListValue[3]
-        };
+        return inventoryPage.sortListValue;
     }
 
     @Test(dataProvider = "filter")
